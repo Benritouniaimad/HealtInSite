@@ -1,0 +1,111 @@
+/* HealthInsight Web - Global Styles */
+/* Medical Theme - Professional Blue/White Design */
+
+:root {
+  /* Medical Blue Color Palette */
+  --primary-blue: #2E7DD2;
+  --primary-blue-dark: #1E5BA8;
+  --primary-blue-light: #5BA3E8;
+  --accent-blue: #4A90E2;
+  --light-blue: #E8F4FD;
+  --bg-blue: #F0F8FF;
+  
+  /* Supporting Colors */
+  --white: #FFFFFF;
+  --light-gray: #F5F8FA;
+  --medium-gray: #E1E8ED;
+  --text-gray: #657786;
+  --dark-gray: #14171A;
+  
+  /* Status Colors */
+  --success-green: #27AE60;
+  --warning-orange: #F39C12;
+  --danger-red: #E74C3C;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(46, 125, 210, 0.1);
+  --shadow-md: 0 4px 12px rgba(46, 125, 210, 0.15);
+  --shadow-lg: 0 8px 24px rgba(46, 125, 210, 0.2);
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--dark-gray);
+  background: linear-gradient(135deg, var(--bg-blue) 0%, var(--white) 100%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--primary-blue-dark);
+  line-height: 1.3;
+}
+
+p {
+  color: var(--text-gray);
+  line-height: 1.8;
+}
+
+a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-blue-dark);
+  transform: translateY(-1px);
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(46, 125, 210, 0.1);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-blue-dark);
+}
