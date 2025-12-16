@@ -93,6 +93,53 @@ class HealthRiskPredictor:
         
         return df
     
+    def _determine_disease_and_region(self, patient_data: dict, risk_level: str) -> tuple:
+        """
+        Détermine la maladie et la région du corps basées sur le profil du patient
+        
+        Args:
+            patient_data: Données du patient
+            risk_level: Niveau de risque calculé
+        
+        Returns:
+            Tuple (disease, body_region)
+        """
+        # Analyse des facteurs de risque
+        age = patient_data.get('age', 0)
+        bmi = patient_data.get('bmi', 0)
+        smoker = patient_data.get('smoker', 'no')
+        hypertension = patient_data.get('hypertension', 0)
+        cholesterol = patient_data.get('cholesterol_level', 'normal')
+        
+        # Mapping maladie → région corporelle
+        disease_region_map = {
+            'cardiovascular': 'chest',
+            'diabetes': 'abdomen',
+            'hypertension': 'head',
+            'stroke': 'head',
+            'obesity': 'abdomen',
+            'respiratory': 'chest',
+            'arthritis': 'left_leg',
+        }
+        
+        # Logique de détermination de la maladie
+        if hypertension == 1 and age > 50:
+            disease = 'hypertension' if risk_level in ['moderate', 'high'] else 'cardiovascular'
+        elif bmi > 30:
+            disease = 'diabetes' if risk_level in ['moderate', 'high'] else 'obesity'
+        elif smoker == 'yes':
+            disease = 'respiratory' if risk_level in ['moderate', 'high'] else 'cardiovascular'
+        elif cholesterol == 'high':
+            disease = 'cardiovascular'
+        elif age > 60:
+            disease = 'arthritis' if bmi > 28 else 'cardiovascular'
+        else:
+            disease = 'cardiovascular'  # Par défaut
+        
+        body_region = disease_region_map.get(disease, 'chest')
+        
+        return disease, body_region
+    
     def predict_risk(self, patient_data: dict) -> dict:
         """
         Prédit le risque de maladie pour un patient
@@ -101,7 +148,7 @@ class HealthRiskPredictor:
             patient_data: Dictionnaire avec les caractéristiques du patient
         
         Returns:
-            Dictionnaire avec le score de risque et le niveau de risque
+            Dictionnaire avec le score de risque, niveau de risque, disease et body_region
         """
         if not self.is_loaded:
             self.load_model()
@@ -132,10 +179,15 @@ class HealthRiskPredictor:
         
         confidence = min(max(confidence, 0.5), 0.99)  # Entre 0.5 et 0.99
         
+        # Déterminer la maladie et la région du corps basées sur le profil du patient
+        disease, body_region = self._determine_disease_and_region(patient_data, risk_level)
+        
         return {
             'risk_score': float(risk_proba),
             'risk_level': risk_level,
-            'confidence': float(confidence)
+            'confidence': float(confidence),
+            'disease': disease,
+            'body_region': body_region
         }
 
 

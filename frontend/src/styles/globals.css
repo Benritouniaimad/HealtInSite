@@ -109,3 +109,19 @@ select:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-blue-dark);
 }
+
+/* Animation pour le spinner de chargement */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Styles pour le canvas 3D */
+canvas {
+  display: block;
+  outline: none;
+}

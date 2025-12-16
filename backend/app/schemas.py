@@ -52,13 +52,17 @@ class PredictionOutput(BaseModel):
         description="Niveau de risque (low, moderate, high)"
     )
     confidence: float = Field(..., ge=0.0, le=1.0, description="Confiance du modèle")
+    disease: str = Field(..., description="Type de maladie prédite")
+    body_region: str = Field(..., description="Région du corps affectée")
     
     class Config:
         json_schema_extra = {
             "example": {
                 "risk_score": 0.73,
                 "risk_level": "high",
-                "confidence": 0.85
+                "confidence": 0.85,
+                "disease": "cardiovascular",
+                "body_region": "chest"
             }
         }
 

@@ -18,6 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <nav style={styles.nav}>
             <Link href="/" style={styles.navLink}>Accueil</Link>
             <Link href="/predict" style={styles.navLink}>Prédiction</Link>
+            <Link href="/dashboard" style={styles.navLink}>Dashboard 3D</Link>
             <Link href="/explore" style={styles.navLink}>Exploration</Link>
           </nav>
         </div>
